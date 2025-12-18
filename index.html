@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIVOLD by Verma Jewellers | Premium Gold & Diamond Jewellery</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #D4AF37;
+            --gold-dark: #AA8C2C;
+            --black: #050505;
+            --surface: #121212;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A3A3A3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+
+        .logo-text h2 {
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .logo-text p {
+            font-size: 10px;
+            color: var(--text-secondary);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        nav a {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            background: radial-gradient(circle at 60% 50%, #1a1a1a 0%, #000 70%);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            padding-bottom: 10px; /* Prevent descender clipping */
+            background: linear-gradient(to right, #D4AF37, #FBF5B7, #AA8C2C);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            border: 1px solid var(--gold);
+            border-radius: 50px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+            background: rgba(0,0,0,0.5);
+        }
+
+        .btn:hover {
+            background: var(--gold);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn i { font-size: 20px; }
+
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            background: url('https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            mask-image: linear-gradient(to right, transparent, black 40%);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 40%);
+            opacity: 0.6;
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 20px auto 0;
+        }
+
+        /* ABOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .about-img {
+            height: 400px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        /* CONTACT */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: var(--surface);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #222;
+        }
+
+        .contact-info h3 { margin-bottom: 20px; font-size: 24px; }
+        .contact-item { margin-bottom: 20px; display: flex; gap: 15px; color: var(--text-secondary); }
+        .contact-item i { color: var(--gold); }
+
+        .map-container {
+            height: 300px;
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .map-container iframe { width: 100%; height: 100%; border: 0; }
+
+        /* FOOTER */
+        footer {
+            background: #000;
+            padding: 80px 10% 40px;
+            border-top: 1px solid #111;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h2 { font-size: 30px; margin-bottom: 10px; }
+        .footer-brand p { color: var(--text-secondary); max-width: 300px; }
+
+        .footer-links h4 { color: #FFF; margin-bottom: 20px; font-family: 'Outfit', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: var(--text-secondary); font-size: 14px; }
+        .footer-links a:hover { color: var(--gold); padding-left: 5px; }
+
+        .copyright {
+            text-align: center;
+            color: #444;
+            font-size: 12px;
+            padding-top: 40px;
+            border-top: 1px solid #111;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 40px; }
+            .hero-image { display: none; }
+            .hero { padding: 0 20px; justify-content: center; text-align: center; }
+            .hero-content { z-index: 10; }
+            .download-buttons { justify-content: center; }
+            header { padding: 20px; }
+            nav { display: none; } /* Hide mobile menu for simplicity in single file */
+            .about-grid, .contact-container { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; gap: 40px; }
+        }
+    </style>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <!-- Using the local icon if hosted, or a placeholder -->
+            <div class="logo-text">
+                <h2>SIVOLD</h2>
+                <p>BY VERMA JEWELLERS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>The Gold Standard <br> of Elegance</h1>
+            <p>Experience the finest collection of gold and diamond jewellery, crafted with tradition since 1995. Now available at your fingertips.</p>
+            
+            <div class="download-buttons">
+                <a href="#" class="btn">
+                    <i class="fab fa-google-play"></i>
+                    <div>
+                        <span style="display:block; font-size:8px; line-height:1;">GET IT ON</span>
+                        <span style="font-weight:bold;">Google Play</span>
+                    </div>
+                </a>
+                <a href="#" class="btn">
+                    <i class="fab fa-apple"></i>
+                    <div>
+                        <span style="display:block; font-size:8px; line-height:1;">Download on the</span>
+                        <span style="font-weight:bold;">App Store</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="hero-image"></div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <h2 class="section-title">Our Legacy</h2>
+        <div class="about-grid">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1617038224558-28ad3fb55831?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Jewellery Craft">
+            </div>
+            <div class="about-text">
+                <h3>Crafting Eternity Since 1995</h3>
+                <br>
+                <p>Verma Jewellers has been a symbol of trust, transparency, and tradition in Dehradun for nearly three decades. SIVOLD creates a bridge between our rich heritage and modern convenience.</p>
+                <p>Each piece is a masterpiece, hallmarked for purity and designed to make your special moments unforgettable. With our new mobile application, we bring our entire showroom to your device, offering seamless shopping, live gold rates, and exclusive rewards.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2 class="section-title">Visit Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>77, Thakurpur Rd, Tyagi Market, Indira Market, Shahpur, Prem Nagar, Dehradun, Shahpur Santore, Uttarakhand 248007</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>+91-9897326628</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>sivold.vj@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <p>Mon - Sat: 11:00 AM - 8:00 PM</p>
+                </div>
+            </div>
+            <div class="map-container">
+                <!-- User to paste embedding link here -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.5199554066758!2d77.95864837576181!3d30.33616950468968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092a9d4105b99b%3A0x7d24c7b7b4641dfd!2sVarma%20Jewellers!5e0!3m2!1sen!2sin!4v1766001557630!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Placeholder -->
+    <!-- Privacy Policy Section -->
+    <section id="privacy" style="background:#0a0a0a;">
+        <h2 class="section-title">Privacy Policy</h2>
+        <div style="max-width:800px; margin:0 auto; color:#888;">
+            <p style="text-align: center; margin-bottom: 20px;">At Sivold, we value your privacy. We collect minimal data required to serve you better.</p>
+            
+            <!-- Partial View (Collapsed) -->
+            <div id="privacy-intro" style="text-align: center;">
+                <button onclick="togglePrivacy()" class="btn" style="background:transparent; color:var(--gold); cursor:pointer;">
+                    Read Full Statement <i class="fas fa-chevron-down" style="font-size:12px; margin-left:5px;"></i>
+                </button>
+            </div>
+
+            <!-- Full Policy (Hidden by default) -->
+            <div id="privacy-full" style="display: none; text-align: left; background: #111; padding: 30px; border-radius: 12px; border: 1px solid #222; margin-top: 20px;">
+                <h3 style="color:var(--gold); font-family:'Playfair Display', serif; margin-bottom:10px;">Privacy Policy</h3>
+                <p style="margin-bottom:20px; font-size:14px;"><strong>Effective Date:</strong> December 18, 2025<br><strong>Entity:</strong> Verma Jewellers</p>
+
+                <h4 style="color:#FFF; margin-top:20px; margin-bottom:10px;">1. Information We Collect</h4>
+                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 15px;">
+                    <li><strong>Personal Identification:</strong> Name, Phone Number (OTP), Email Address (optional).</li>
+                    <li><strong>Transactional Data:</strong> Order history, invoices, delivery addresses.</li>
+                    <li><strong>Device Information:</strong> Device ID, OS version.</li>
+                    <li><strong>Support Data:</strong> Chat messages and query images.</li>
+                </ul>
+
+                <h4 style="color:#FFF; margin-top:20px; margin-bottom:10px;">2. How We Use Your Data</h4>
+                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 15px;">
+                    <li><strong>Order Fulfillment:</strong> Deliveries & Invoicing.</li>
+                    <li><strong>Identity Verification:</strong> OTP Login Security.</li>
+                    <li><strong>Support:</strong> Chat resolution.</li>
+                </ul>
+
+                <h4 style="color:#FFF; margin-top:20px; margin-bottom:10px;">3. Data Sharing</h4>
+                <p>We do not sell personal data. We share only with:</p>
+                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 15px;">
+                    <li><strong>Google Firebase:</strong> Secure database & authentication hosting.</li>
+                    <li><strong>Legal Authorities:</strong> Compliance with law.</li>
+                </ul>
+
+                <h4 style="color:#FFF; margin-top:20px; margin-bottom:10px;">4. Data Retention & Deletion</h4>
+                <p>Retained while account exists. For deletion, contact support (no in-app button for invoice security).</p>
+                <p><strong>To Delete Account:</strong> Email <strong>sivold.vj@gmail.com</strong> or use in-app Chat Support.</p>
+
+                <h4 style="color:#FFF; margin-top:20px; margin-bottom:10px;">5. Contact Us</h4>
+                <p><strong>Verma Jewellers</strong><br>
+                77, Thakurpur Rd, Tyagi Market, Indira Market, Shahpur, Prem Nagar, Dehradun, Shahpur Santore, Uttarakhand 248007<br>
+                Phone: +91-9897326628<br>
+                Email: sivold.vj@gmail.com</p>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button onclick="togglePrivacy()" style="background:none; border:none; color:#666; cursor:pointer; text-decoration:underline;">Close</button>
+                </div>
+            </div>
+            
+            <script>
+                function togglePrivacy() {
+                    var full = document.getElementById('privacy-full');
+                    var intro = document.getElementById('privacy-intro');
+                    if (full.style.display === "none") {
+                        full.style.display = "block";
+                        intro.style.display = "none";
+                    } else {
+                        full.style.display = "none";
+                        intro.style.display = "block";
+                    }
+                }
+            </script>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>SIVOLD</h2>
+                <p>The Gold Standard of Trust & Tradition.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Download</h4>
+                <ul>
+                    <li><a href="#">Android App</a></li>
+                    <li><a href="#">iOS App</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Verma Jewellers. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
