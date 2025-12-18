@@ -272,16 +272,171 @@
         }
 
         /* MOBILE */
+            .mobile-menu-btn { display: none; } /* Hidden on desktop */
+
+        
         @media (max-width: 768px) {
             .hero h1 { font-size: 40px; }
             .hero-image { display: none; }
-            .hero { padding: 0 20px; justify-content: center; text-align: center; }
-            .hero-content { z-index: 10; }
-            .download-buttons { justify-content: center; }
+            .hero-carousel { display: block; }
+            .hero { padding: 120px 20px 60px; justify-content: center; text-align: center; height: auto; min-height: 100vh; }
+            .hero-content { z-index: 10; width: 100%; top: 50%; transform: translateY(-50%); position: absolute; }
+            .download-buttons { justify-content: center; flex-wrap: wrap; }
             header { padding: 20px; }
-            nav { display: none; } /* Hide mobile menu for simplicity in single file */
+            nav { 
+                position: fixed; top: 80px; left: 0; width: 100%; background: #000; 
+                flex-direction: column; padding: 20px; border-bottom: 1px solid #222;
+                transform: translateY(-150%); transition: 0.3s;
+            }
+            nav.active { transform: translateY(0); }
+            nav ul { flex-direction: column; gap: 20px; text-align: center; }
+            
             .about-grid, .contact-container { grid-template-columns: 1fr; }
-            .footer-content { flex-direction: column; gap: 40px; }
+            .footer-content { flex-direction: column; gap: 40px; text-align: center; }
+            .footer-links a:hover { padding-left: 0; color: var(--gold); }
+            
+            .mobile-menu-btn { display: block; font-size: 24px; color: var(--gold); cursor: pointer; }
+        }
+
+        /* HERO CAROUSEL */
+        .hero-carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .hero-slide.active {
+            opacity: 0.4; /* Darkened for text readability */
+        }
+        
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+            color: #FFF;
+        }
+
+        /* CAROUSEL */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 20px 5px; /* Space for shadow */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        .carousel-track::-webkit-scrollbar { display: none; }
+
+        .product-card {
+            min-width: 280px;
+            max-width: 280px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            border-color: var(--gold);
+        }
+
+        .card-img {
+            height: 320px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .product-card:hover .card-img img {
+            transform: scale(1.1);
+        }
+
+        .card-info {
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(to top, #000, rgba(17,17,17,0.95));
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #FFF;
+            margin-bottom: 5px;
+        }
+
+        .card-price {
+            color: var(--gold);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(212, 175, 55, 0.9);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
         }
     </style>
     <!-- FontAwesome -->
@@ -298,12 +453,16 @@
                 <p>BY VERMA JEWELLERS</p>
             </div>
         </div>
-        <nav>
+        <div class="mobile-menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav id="navbar">
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+                <li><a href="#collection" onclick="toggleMenu()">Collection</a></li>
+                <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+                <li><a href="#privacy" onclick="toggleMenu()">Privacy</a></li>
             </ul>
         </nav>
     </header>
@@ -331,7 +490,61 @@
                 </a>
             </div>
         </div>
-        <div class="hero-image"></div>
+        <div class="hero-carousel">
+            <div class="hero-slide active" style="background-image: url('assets/web/hero1.png');"></div>
+            <div class="hero-slide" style="background-image: url('assets/web/hero2.png');"></div>
+        </div>
+    </section>
+
+    <!-- Collection Carousel -->
+    <section id="collection" style="background: #080808;">
+        <h2 class="section-title">Latest Collection</h2>
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <!-- Static Generated Items -->
+                <div class="product-card">
+                    <div class="badge">New Arrival</div>
+                    <div class="card-img">
+                        <img src="assets/web/col1.png" alt="Gold Necklace">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">Royal Kundan Set</h3>
+                        <!-- Price removed as per request -->
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="badge">Bestseller</div>
+                    <div class="card-img">
+                        <img src="assets/web/col2.png" alt="Diamond Ring">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">Solitaire Promise</h3>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="badge">Heritage</div>
+                    <div class="card-img">
+                        <img src="assets/web/col3.png" alt="Bangles">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">Antique Gold Bangles</h3>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="badge">Trending</div>
+                    <div class="card-img">
+                        <img src="assets/web/col4.png" alt="Earrings">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">Polki Chandbalis</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p style="text-align:center; color:#666; font-size:12px; margin-top:10px;">Swipe to explore collections</p>
     </section>
 
     <!-- About -->
@@ -339,7 +552,7 @@
         <h2 class="section-title">Our Legacy</h2>
         <div class="about-grid">
             <div class="about-img">
-                <img src="https://images.unsplash.com/photo-1617038224558-28ad3fb55831?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Jewellery Craft">
+                <img src="assets/web/legacy.png" alt="Jewellery Craft">
             </div>
             <div class="about-text">
                 <h3>Crafting Eternity Since 1995</h3>
@@ -448,9 +661,31 @@
                         intro.style.display = "block";
                     }
                 }
+
+                function toggleMenu() {
+                    const nav = document.getElementById('navbar');
+                    nav.classList.toggle('active');
+                }
+
+                // Hero Carousel Logic
+                const slides = document.querySelectorAll('.hero-slide');
+                let currentSlide = 0;
+
+                function nextSlide() {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }
+
+                setInterval(nextSlide, 5000); // Change image every 5 seconds
             </script>
         </div>
     </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919897326628" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <!-- Footer -->
     <footer>
@@ -463,6 +698,7 @@
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="#home">Home</a></li>
+                    <li><a href="#collection">Collection</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
