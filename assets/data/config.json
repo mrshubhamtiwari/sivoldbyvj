@@ -1,0 +1,39 @@
+{
+    "gallery": [
+        {
+            "category": "exterior",
+            "image": "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "title": "Grand Facade"
+        },
+        {
+            "category": "exterior",
+            "image": "https://images.unsplash.com/photo-1577083288073-40892c0860a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "title": "Main Entrance"
+        },
+        {
+            "category": "interior",
+            "image": "https://images.unsplash.com/photo-1615655406736-b37c4fabf923?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "title": "Luxury Showroom"
+        },
+        {
+            "category": "interior",
+            "image": "https://images.unsplash.com/photo-1531995811006-35cb42e1a026?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "title": "Gold Counter"
+        },
+        {
+            "category": "interior",
+            "image": "https://images.unsplash.com/photo-1576014131795-d4401f4a4716?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "title": "Diamond Lounge"
+        },
+        {
+            "category": "events",
+            "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "title": "Collection Launch"
+        },
+        {
+            "category": "events",
+            "image": "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "title": "Customer Meet"
+        }
+    ]
+}
