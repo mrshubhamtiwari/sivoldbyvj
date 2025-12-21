@@ -279,7 +279,7 @@
             .hero h1 { font-size: 40px; }
             .hero-image { display: none; }
             .hero-carousel { display: block; }
-            .hero { padding: 120px 20px 60px; justify-content: center; text-align: center; height: auto; min-height: 100vh; }
+            .hero { padding: 120px 20px 60px; justify-content: center; text-align: center; height: auto; min-height: 100vh; background: transparent; }
             .hero-content { z-index: 10; width: 100%; top: 50%; transform: translateY(-50%); position: absolute; }
             .download-buttons { justify-content: center; flex-wrap: wrap; }
             header { padding: 20px; }
@@ -316,12 +316,29 @@
             height: 100%;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
+            background-attachment: fixed; /* Ensures full coverage without scrolling gaps */
         }
         
         .hero-slide.active {
-            opacity: 0.4; /* Darkened for text readability */
+            opacity: 0.4; 
+        }
+
+        /* Mobile Adjustments for Carousel */
+        @media (max-width: 768px) {
+            .hero-slide {
+                background-attachment: scroll; 
+                height: 100%; 
+                top: 0; 
+            }
+            .hero-carousel {
+               position: absolute; /* Scrolls with the section */
+               height: 100%;
+               width: 100%;
+               z-index: 0; /* Behind content (z-10) but part of section */
+            }
         }
         
         /* Floating WhatsApp */
@@ -351,12 +368,42 @@
             color: #FFF;
         }
 
+        /* Instagram Float */
+        .instagram-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 115px; /* Positioned above WhatsApp */
+            right: 40px;
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .instagram-float:hover {
+            transform: scale(1.1);
+            color: #FFF;
+            box-shadow: 0 5px 15px rgba(214, 36, 159, 0.4);
+        }
+
         /* CAROUSEL */
         .carousel-container {
             position: relative;
             overflow: hidden;
             padding: 20px 0;
         }
+
+        /* ... existing carousel styles ... */
+
 
         .carousel-track {
             display: flex;
@@ -460,9 +507,10 @@
             <ul>
                 <li><a href="#home" onclick="toggleMenu()">Home</a></li>
                 <li><a href="#collection" onclick="toggleMenu()">Collection</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="#about" onclick="toggleMenu()">About</a></li>
                 <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-                <li><a href="#privacy" onclick="toggleMenu()">Privacy</a></li>
+                <li><a href="privacy-policy.html">Privacy</a></li>
             </ul>
         </nav>
     </header>
@@ -493,6 +541,8 @@
         <div class="hero-carousel">
             <div class="hero-slide active" style="background-image: url('assets/web/hero1.png');"></div>
             <div class="hero-slide" style="background-image: url('assets/web/hero2.png');"></div>
+            <div class="hero-slide" style="background-image: url('assets/web/hero3.png');"></div>
+            <div class="hero-slide" style="background-image: url('assets/web/hero4.png');"></div>
         </div>
     </section>
 
@@ -575,7 +625,7 @@
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-phone-alt"></i>
-                    <p>+91-9897326628</p>
+                    <p>+91-6399948345</p>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
@@ -593,99 +643,55 @@
         </div>
     </section>
 
-    <!-- Privacy Policy Placeholder -->
-    <!-- Privacy Policy Section -->
-    <section id="privacy" style="background:#0a0a0a;">
-        <h2 class="section-title">Privacy Policy</h2>
-        <div style="max-width:800px; margin:0 auto; color:#888;">
-            <p style="text-align: center; margin-bottom: 20px;">At Sivold, we value your privacy. We collect minimal data required to serve you better.</p>
-            
-            <!-- Partial View (Collapsed) -->
-            <div id="privacy-intro" style="text-align: center;">
-                <button onclick="togglePrivacy()" class="btn" style="background:transparent; color:var(--gold); cursor:pointer;">
-                    Read Full Statement <i class="fas fa-chevron-down" style="font-size:12px; margin-left:5px;"></i>
-                </button>
-            </div>
-
-            <!-- Full Policy (Hidden by default) -->
-            <div id="privacy-full" style="display: none; text-align: left; background: #111; padding: 30px; border-radius: 12px; border: 1px solid #222; margin-top: 20px;">
-                <h3 style="color:var(--gold); font-family:'Playfair Display', serif; margin-bottom:10px;">Privacy Policy</h3>
-                <p style="margin-bottom:20px; font-size:14px;"><strong>Effective Date:</strong> December 18, 2025<br><strong>Entity:</strong> Verma Jewellers</p>
-
-                <h4 style="color:#FFF; margin-top:20px; margin-bottom:10px;">1. Information We Collect</h4>
-                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 15px;">
-                    <li><strong>Personal Identification:</strong> Name, Phone Number (OTP), Email Address (optional).</li>
-                    <li><strong>Transactional Data:</strong> Order history, invoices, delivery addresses.</li>
-                    <li><strong>Device Information:</strong> Device ID, OS version.</li>
-                    <li><strong>Support Data:</strong> Chat messages and query images.</li>
-                </ul>
-
-                <h4 style="color:#FFF; margin-top:20px; margin-bottom:10px;">2. How We Use Your Data</h4>
-                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 15px;">
-                    <li><strong>Order Fulfillment:</strong> Deliveries & Invoicing.</li>
-                    <li><strong>Identity Verification:</strong> OTP Login Security.</li>
-                    <li><strong>Support:</strong> Chat resolution.</li>
-                </ul>
-
-                <h4 style="color:#FFF; margin-top:20px; margin-bottom:10px;">3. Data Sharing</h4>
-                <p>We do not sell personal data. We share only with:</p>
-                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 15px;">
-                    <li><strong>Google Firebase:</strong> Secure database & authentication hosting.</li>
-                    <li><strong>Legal Authorities:</strong> Compliance with law.</li>
-                </ul>
-
-                <h4 style="color:#FFF; margin-top:20px; margin-bottom:10px;">4. Data Retention & Deletion</h4>
-                <p>Retained while account exists. For deletion, contact support (no in-app button for invoice security).</p>
-                <p><strong>To Delete Account:</strong> Email <strong>sivold.vj@gmail.com</strong> or use in-app Chat Support.</p>
-
-                <h4 style="color:#FFF; margin-top:20px; margin-bottom:10px;">5. Contact Us</h4>
-                <p><strong>Verma Jewellers</strong><br>
-                77, Thakurpur Rd, Tyagi Market, Indira Market, Shahpur, Prem Nagar, Dehradun, Shahpur Santore, Uttarakhand 248007<br>
-                Phone: +91-9897326628<br>
-                Email: sivold.vj@gmail.com</p>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button onclick="togglePrivacy()" style="background:none; border:none; color:#666; cursor:pointer; text-decoration:underline;">Close</button>
-                </div>
-            </div>
-            
-            <script>
-                function togglePrivacy() {
-                    var full = document.getElementById('privacy-full');
-                    var intro = document.getElementById('privacy-intro');
-                    if (full.style.display === "none") {
-                        full.style.display = "block";
-                        intro.style.display = "none";
-                    } else {
-                        full.style.display = "none";
-                        intro.style.display = "block";
-                    }
-                }
-
-                function toggleMenu() {
-                    const nav = document.getElementById('navbar');
-                    nav.classList.toggle('active');
-                }
-
-                // Hero Carousel Logic
-                const slides = document.querySelectorAll('.hero-slide');
-                let currentSlide = 0;
-
-                function nextSlide() {
-                    slides[currentSlide].classList.remove('active');
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add('active');
-                }
-
-                setInterval(nextSlide, 5000); // Change image every 5 seconds
-            </script>
-        </div>
-    </section>
-
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/919897326628" class="whatsapp-float" target="_blank">
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navbar');
+            nav.classList.toggle('active');
+        }
+
+        // Hero Carousel Logic
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 5000); // Change image every 5 seconds
+    </script>
+
+    <!-- Floating Social Buttons -->
+    <a href="https://instagram.com/sivold.vj" id="instagram-link" class="instagram-float" target="_blank">
+        <i class="fab fa-instagram"></i>
+    </a>
+
+    <a href="https://wa.me/916399948345" id="whatsapp-link" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- Carousel Logic -->
+    <script>
+        // Hero Carousel Logic
+        function initHeroCarousel() {
+            const slides = document.querySelectorAll('.hero-slide');
+            if(slides.length === 0) return;
+            
+            let currentSlide = 0;
+            if(window.heroInterval) clearInterval(window.heroInterval);
+
+            window.heroInterval = setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Start Carousel
+        document.addEventListener('DOMContentLoaded', initHeroCarousel);
+    </script>
 
     <!-- Footer -->
     <footer>
@@ -701,6 +707,7 @@
                     <li><a href="#collection">Collection</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="data-safety.html">Data Safety</a></li>
                 </ul>
             </div>
             <div class="footer-links">
